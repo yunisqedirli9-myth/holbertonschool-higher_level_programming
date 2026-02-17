@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 def roman_to_int(roman_string):
-    if type(roman_string) is not str or roman_string is None:
+    if roman_string is None or type(roman_string) is not str:
         return 0
 
     values = {
@@ -11,7 +11,12 @@ def roman_to_int(roman_string):
 
     for i in range(len(roman_string)):
         v = values.get(roman_string[i], 0)
-        next_v = values.get(roman_string[i + 1], 0) if i + 1 < len(roman_string) else 0
+
+        if i + 1 < len(roman_string):
+            next_v = values.get(roman_string[i + 1], 0)
+        else:
+            next_v = 0
+
         if v < next_v:
             total -= v
         else:
