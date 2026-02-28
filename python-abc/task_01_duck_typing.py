@@ -1,62 +1,50 @@
-#!/usr/bin/python3
-"""
-Abstrakt klaslar və Duck Typing konseptini nümayiş etdirən modul.
-"""
+#!/usr/bin/env python3
 from abc import ABC, abstractmethod
 import math
 
 
 class Shape(ABC):
-    """Bütün həndəsi fiqurlar üçün abstrakt baza klası."""
+    """Abstract base class for geometric shapes."""
 
     @abstractmethod
     def area(self):
-        """Sahəni hesablayan abstrakt metod."""
+        """Return the area of the shape."""
         pass
 
     @abstractmethod
     def perimeter(self):
-        """Perimetri hesablayan abstrakt metod."""
+        """Return the perimeter of the shape."""
         pass
 
 
 class Circle(Shape):
-    """Circle (Çevrə) klası."""
+    """Circle shape defined by its radius."""
 
     def __init__(self, radius):
-        """Radiusu mənimsədir."""
         self.radius = radius
 
     def area(self):
-        """Çevrənin sahəsini qaytarır: π * r²"""
         return math.pi * (self.radius ** 2)
 
     def perimeter(self):
-        """Çevrənin perimetrini qaytarır: 2 * π * r"""
         return 2 * math.pi * self.radius
 
 
 class Rectangle(Shape):
-    """Rectangle (Düzbucaqlı) klası."""
+    """Rectangle shape defined by width and height."""
 
     def __init__(self, width, height):
-        """Eni və hündürlüyü mənimsədir."""
         self.width = width
         self.height = height
 
     def area(self):
-        """Düzbucaqlının sahəsini qaytarır: en * hündürlük"""
         return self.width * self.height
 
     def perimeter(self):
-        """Düzbucaqlının perimetrini qaytarır: 2 * (en + hündürlük)"""
         return 2 * (self.width + self.height)
 
 
 def shape_info(shape):
-    """
-    Duck typing istifadə edərək fiqur haqqında məlumatı çap edir.
-    Obyektin tipini yoxlamır, sadəcə lazımi metodları çağırır.
-    """
-    print("Area: {}".format(shape.area()))
-    print("Perimeter: {}".format(shape.perimeter()))
+    """Print area and perimeter of any shape (duck typing)."""
+    print(f"Area: {shape.area()}")
+    print(f"Perimeter: {shape.perimeter()}")
