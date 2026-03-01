@@ -1,62 +1,70 @@
 #!/usr/bin/python3
-"""
-Abstrakt klaslar və Duck Typing konseptini nümayiş etdirən modul.
-"""
+"""Module that defines Shape ABC, Circle, Rectangle, and shape_info."""
 from abc import ABC, abstractmethod
 import math
 
 
 class Shape(ABC):
-    """Bütün həndəsi fiqurlar üçün abstrakt baza klası."""
+    """Abstract base class for shapes."""
 
     @abstractmethod
     def area(self):
-        """Sahəni hesablayan abstrakt metod."""
+        """Return the area of the shape."""
         pass
 
     @abstractmethod
     def perimeter(self):
-        """Perimetri hesablayan abstrakt metod."""
+        """Return the perimeter of the shape."""
         pass
 
 
 class Circle(Shape):
-    """Circle (Çevrə) klası."""
+    """A Circle class that inherits from Shape."""
 
     def __init__(self, radius):
-        """Radiusu mənimsədir."""
-        self.radius = radius
+        """Initialize Circle with a radius.
+
+        Args:
+            radius (float): The radius of the circle.
+        """
+        self.radius = abs(radius)
 
     def area(self):
-        """Çevrənin sahəsini qaytarır."""
-        return math.pi * (self.radius ** 2)
+        """Return the area of the circle."""
+        return math.pi * self.radius ** 2
 
     def perimeter(self):
-        """Çevrənin perimetrini qaytarır."""
+        """Return the perimeter (circumference) of the circle."""
         return 2 * math.pi * self.radius
 
 
 class Rectangle(Shape):
-    """Rectangle (Düzbucaqlı) klası."""
+    """A Rectangle class that inherits from Shape."""
 
     def __init__(self, width, height):
-        """Eni və hündürlüyü mənimsədir."""
+        """Initialize Rectangle with width and height.
+
+        Args:
+            width (float): The width of the rectangle.
+            height (float): The height of the rectangle.
+        """
         self.width = width
         self.height = height
 
     def area(self):
-        """Düzbucaqlının sahəsini qaytarır."""
-        return self.width * self.height
+        """Return the area of the rectangle."""
+        return float(self.width * self.height)
 
     def perimeter(self):
-        """Düzbucaqlının perimetrini qaytarır."""
-        return 2 * (self.width + self.height)
+        """Return the perimeter of the rectangle."""
+        return float(2 * (self.width + self.height))
 
 
 def shape_info(shape):
-    """
-    Duck typing istifadə edərək fiqur haqqında məlumatı çap edir.
-    Test sisteminin gözlədiyi dəqiq format: 'Area: {}' və 'Perimeter: {}'
+    """Print the area and perimeter of a shape.
+
+    Args:
+        shape: Any object that implements area() and perimeter().
     """
     print("Area: {}".format(shape.area()))
     print("Perimeter: {}".format(shape.perimeter()))
